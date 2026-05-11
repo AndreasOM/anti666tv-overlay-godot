@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://4qappuxbs8sf"]
+[gd_scene load_steps=4 format=3 uid="uid://4qappuxbs8sf"]
 
-[ext_resource type="Texture2D" uid="uid://cbkdryhmp6rdd" path="res://icon.svg" id="1_nv86q"]
+[ext_resource type="Texture2D" uid="uid://degogihyxqio6" path="res://assets/bugs/anti666-streambug-2025-05-17-150.png" id="1_42nn7"]
+[ext_resource type="Script" uid="uid://b20npcfxwgm2q" path="res://overlay.gd" id="1_qsnas"]
 [ext_resource type="Script" uid="uid://bqr1j0bnsmnmx" path="res://banner.gd" id="2_42nn7"]
 
 [node name="Overlay" type="MarginContainer"]
@@ -8,15 +9,23 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 1920.0
 grow_vertical = 2
+script = ExtResource("1_qsnas")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 23
+theme_override_constants/margin_top = 23
+theme_override_constants/margin_right = 23
+theme_override_constants/margin_bottom = 23
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture = ExtResource("1_nv86q")
+texture = ExtResource("1_42nn7")
 stretch_mode = 2
 
 [node name="Spacer" type="Control" parent="VBoxContainer"]
@@ -51,21 +60,49 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 
-[node name="Banner" type="MarginContainer" parent="BannerVBoxContainer"]
-layout_mode = 2
-script = ExtResource("2_42nn7")
-
-[node name="Background" type="ColorRect" parent="BannerVBoxContainer/Banner"]
-custom_minimum_size = Vector2(0, 128)
-layout_mode = 2
-color = Color(0.019607844, 0.26666668, 0.5686275, 0.44705883)
-
-[node name="BannerLabel" type="Label" parent="BannerVBoxContainer/Banner"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Soon ..."
-
 [node name="BottomSpacer" type="Control" parent="BannerVBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
+
+[node name="Banner" type="MarginContainer" parent="."]
+layout_mode = 2
+script = ExtResource("2_42nn7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Banner"]
+layout_mode = 2
+
+[node name="TopSpacer" type="Control" parent="Banner/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Background" type="ColorRect" parent="Banner/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.1254902, 0.1254902, 0.5019608, 0.5019608)
+
+[node name="MarginContainer" type="MarginContainer" parent="Banner/VBoxContainer/Background"]
+layout_mode = 0
+offset_top = -361.0
+offset_right = 1920.0
+offset_bottom = 719.0
+theme_override_constants/margin_left = 50
+
+[node name="BannerLabel" type="Label" parent="Banner/VBoxContainer/Background/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"LabelBanner"
+text = "Soon..."
+
+[node name="BottomSpacer" type="Control" parent="Banner/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DebugMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="DebugRichTextLabel" type="RichTextLabel" parent="DebugMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+text = "[Debug]"

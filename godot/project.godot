@@ -22,6 +22,16 @@ window/size/viewport_height=1080
 window/size/initial_position_type=0
 window/size/transparent=true
 window/stretch/mode="canvas_items"
+window/size/mode.arm32=0
+window/size/borderless.arm32=true
+window/size/always_on_top.arm32=true
+window/size/resizable.arm32=false
+window/size/viewport_width.arm32=3840
+window/size/viewport_height.arm32=1080
+
+[gui]
+
+theme/custom="uid://df2qet6tdljbu"
 
 [input]
 
@@ -35,3 +45,4 @@ banner_toggle={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+viewport/transparent_background.arm32=true
