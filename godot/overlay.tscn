@@ -32,39 +32,6 @@ stretch_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LowerThird" type="MarginContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/LowerThird"]
-layout_mode = 2
-
-[node name="TitleLabel" type="Label" parent="VBoxContainer/LowerThird/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.69068754, 0.44585514, 1.1551381e-06, 1)
-theme_override_colors/font_outline_color = Color(0.3481326, 0.21660134, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 48
-text = "R.A.T.S. - 2026"
-
-[node name="DescriptionRichTextLabel" type="RichTextLabel" parent="VBoxContainer/LowerThird/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "- Rambling About Things & Stuff"
-fit_content = true
-
-[node name="BannerVBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="TopSpacer" type="Control" parent="BannerVBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-
-[node name="BottomSpacer" type="Control" parent="BannerVBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-
 [node name="Banner" type="MarginContainer" parent="."]
 layout_mode = 2
 script = ExtResource("2_42nn7")
@@ -98,7 +65,30 @@ text = "Soon..."
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="LowerThird" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 29
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LowerThird"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="LowerThird/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"LowerThirdTitleLabel"
+theme_override_font_sizes/font_size = 48
+text = "R.A.T.S. - 2026"
+
+[node name="DescriptionRichTextLabel" type="RichTextLabel" parent="LowerThird/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"LowerThirdDescriptionRichTextLabel"
+text = "- Rambling About Things & Stuff"
+fit_content = true
+
 [node name="DebugMarginContainer" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
 
 [node name="DebugRichTextLabel" type="RichTextLabel" parent="DebugMarginContainer"]
