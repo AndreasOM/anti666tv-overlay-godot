@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2w6o1fbrigik"]
+
+[ext_resource type="Script" uid="uid://bqr1j0bnsmnmx" path="res://overlay_elements/banner/banner_overlay_element.gd" id="1_f2x1a"]
+
+[node name="BannerOverlayElement" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("1_f2x1a")
+background_color = Color(0.1254902, 0.1254902, 0.5019608, 0.5019608)
+focus_color = Color(0.6632532, 0.4676271, 0.119625874, 0.5019608)
+metadata/_custom_type_script = "uid://bqr1j0bnsmnmx"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TopSpacer" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Background" type="ColorRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.1254902, 0.1254902, 0.5019608, 0.5019608)
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Background"]
+layout_mode = 0
+offset_top = -361.0
+offset_right = 1920.0
+offset_bottom = 719.0
+theme_override_constants/margin_left = 50
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Background/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_type_variation = &"BannerLineEdit"
+text = "Soon..."
+editable = false
+context_menu_enabled = false
+emoji_menu_enabled = false
+caret_blink = true
+
+[node name="BottomSpacer" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="focus_exited" from="VBoxContainer/Background/MarginContainer/LineEdit" to="." method="_on_line_edit_focus_exited"]
+[connection signal="text_submitted" from="VBoxContainer/Background/MarginContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]

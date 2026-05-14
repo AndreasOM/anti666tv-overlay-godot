@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddju1wlyy1dr3"]
+
+[ext_resource type="Script" uid="uid://h7eoaj2dtmmq" path="res://overlay_elements/bug/bug_overlay_element.gd" id="1_4pim4"]
+[ext_resource type="Texture2D" uid="uid://degogihyxqio6" path="res://assets/bugs/anti666-streambug-2025-05-17-150.png" id="2_hyfp4"]
+
+[node name="BugOverlayElement" type="MarginContainer"]
+focus_mode = 2
+theme_override_constants/margin_left = 23
+theme_override_constants/margin_top = 23
+theme_override_constants/margin_right = 23
+theme_override_constants/margin_bottom = 23
+script = ExtResource("1_4pim4")
+metadata/_custom_type_script = "uid://mvi5plnivtld"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_hyfp4")
+stretch_mode = 2
