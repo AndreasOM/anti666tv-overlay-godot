@@ -1,0 +1,15 @@
+[configuration]
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.5
+reloadable = true
+
+[libraries]
+;linux.debug.x86_64 =     "res://../rust/target/debug/lib{YourCrate}.so"
+;linux.release.x86_64 =   "res://../rust/target/release/lib{YourCrate}.so"
+;windows.debug.x86_64 =   "res://../rust/target/debug/{YourCrate}.dll"
+;windows.release.x86_64 = "res://../rust/target/release/{YourCrate}.dll"
+;macos.debug =            "./bin/debug/libomg_twitch_godot.dylib"
+;macos.release =          "./bin/debug/libomg_twitch_godot.dylib"
+
+macos.debug.arm64 =      "./bin/macos/aarch64/debug/libomg_twitch_godot.dylib"
+; macos.release.arm64 =    "./bin/macos/aarch64/release/libomg_twitch_godot.dylib"

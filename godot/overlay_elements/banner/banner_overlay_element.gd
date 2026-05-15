@@ -6,7 +6,6 @@ extends OverlayElement
 @onready var background: ColorRect = %Background
 @onready var line_edit: LineEdit = %LineEdit
 
-
 func _ready() -> void:
 	self.background.color = self.background_color
 	super._ready()

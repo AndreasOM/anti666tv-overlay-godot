@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgppkmtajf7r4"]
+
+[ext_resource type="Script" uid="uid://8cmtwoa0jr10" path="res://overlay_elements/twitch_chat/twitch_chat_overlay_element.gd" id="1_s4no0"]
+[ext_resource type="FontFile" uid="uid://dke4iscrnvat6" path="res://assets/fonts/FiraCode-Medium.ttf" id="2_3beb1"]
+
+[node name="TwitchChatOverlayElement" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 540
+theme_override_constants/margin_bottom = 128
+script = ExtResource("1_s4no0")
+metadata/_custom_type_script = "uid://mvi5plnivtld"
+
+[node name="OmgTwitchChannelNode" type="OmgTwitchChannelNode" parent="."]
+unique_name_in_owner = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3beb1")
+theme_override_font_sizes/font_size = 64
+text = "Twitch Chat"
+
+[connection signal="message_received" from="OmgTwitchChannelNode" to="." method="_on_omg_twitch_channel_node_message_received"]

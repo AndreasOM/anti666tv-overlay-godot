@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://4qappuxbs8sf"]
+[gd_scene load_steps=5 format=3 uid="uid://4qappuxbs8sf"]
 
 [ext_resource type="Script" uid="uid://b20npcfxwgm2q" path="res://overlay.gd" id="1_qsnas"]
 [ext_resource type="PackedScene" uid="uid://ddju1wlyy1dr3" path="res://overlay_elements/bug/bug_overlay_element.tscn" id="2_qsnas"]
 [ext_resource type="PackedScene" uid="uid://d2w6o1fbrigik" path="res://overlay_elements/banner/banner_overlay_element.tscn" id="3_qsnas"]
+[ext_resource type="PackedScene" uid="uid://dgppkmtajf7r4" path="res://overlay_elements/twitch_chat/twitch_chat_overlay_element.tscn" id="4_2kreh"]
 
 [node name="Overlay" type="MarginContainer"]
 anchors_preset = 9
@@ -55,3 +56,6 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 64
 text = "[Debug]"
+
+[node name="TwitchChatOverlayElement" parent="." instance=ExtResource("4_2kreh")]
+layout_mode = 2

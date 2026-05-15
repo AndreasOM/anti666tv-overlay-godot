@@ -1,0 +1,24 @@
+list:
+	just --list
+
+build-gdext:
+	# cd omg-twitch-godot
+	# pwd
+	cargo build --target aarch64-apple-darwin --manifest-path omg-twitch-godot/Cargo.toml
+
+build-gdext-armv7:
+	cargo build --target armv7-unknown-linux-gnueabihf --manifest-path omg-twitch-godot/Cargo.toml
+
+build-gdext-arm64:
+	cargo build --target aarch64-unknown-linux-gnu --manifest-path omg-twitch-godot/Cargo.toml
+
+
+update-dist:
+	mkdir -p ../godot/addons/omg_twitch/
+	mkdir -p ../godot/addons/omg_twitch/bin/macos/aarch64
+	mkdir -p ../godot/addons/omg_twitch/bin/macos/aarch64/debug
+	mkdir -p ../godot/addons/omg_twitch/bin/macos/aarch64/release
+
+
+	cp omg-twitch-godot/omg_twitch.gdextension ../godot/addons/omg_twitch/
+	cp omg-twitch-godot/target/aarch64-apple-darwin/debug/libomg_twitch_godot.dylib ../godot/addons/omg_twitch/bin/macos/aarch64/debug/
