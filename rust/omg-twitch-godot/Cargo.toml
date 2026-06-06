@@ -10,3 +10,4 @@ crate-type = ["cdylib"]
 [dependencies]
 # godot = "0.4.5"
 godot = { version = "0.5.3", features = ["experimental-wasm"] }
+tokio = { version = "1.52.3", features = ["rt-multi-thread", "sync", "time"] }

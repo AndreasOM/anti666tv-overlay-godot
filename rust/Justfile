@@ -1,6 +1,9 @@
 list:
 	just --list
 
+check:
+	cargo check --manifest-path omg-twitch-godot/Cargo.toml
+
 build-gdext:
 	# cd omg-twitch-godot
 	# pwd
@@ -24,7 +27,11 @@ update-dist:
 
 
 	cp omg-twitch-godot/omg_twitch.gdextension ../godot/addons/omg_twitch/
-	cp omg-twitch-godot/target/aarch64-apple-darwin/debug/libomg_twitch_godot.dylib ../godot/addons/omg_twitch/bin/macos/aarch64/debug/
+	codesign -s - omg-twitch-godot/target/aarch64-apple-darwin/debug/libomg_twitch_godot.dylib
+	cp \
+		omg-twitch-godot/target/aarch64-apple-darwin/debug/libomg_twitch_godot.dylib \
+		../godot/addons/omg_twitch/bin/macos/aarch64/debug/
+
 
 	cp \
 		omg-twitch-godot/target/armv7-unknown-linux-gnueabihf/debug/libomg_twitch_godot.so \

@@ -11,6 +11,9 @@ func _ready() -> void:
 		var msg = self._pending_messages.pop_front()
 		self.add_message( msg )
 		
+func _process(delta: float) -> void:
+	self.omg_twitch_channel_node.poll()
+	
 func _on_omg_twitch_channel_node_message_received(msg: String) -> void:
 	print("msg: %s" % [ msg ])
 	if self.v_box_container == null:
