@@ -1,6 +1,8 @@
 list:
 	just --list
 
+all: build-gdext build-gdext-armv7 build-gdext-arm64 update-dist
+	
 check:
 	cargo check --manifest-path omg-twitch-godot/Cargo.toml
 

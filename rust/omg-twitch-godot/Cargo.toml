@@ -11,3 +11,4 @@ crate-type = ["cdylib"]
 # godot = "0.4.5"
 godot = { version = "0.5.3", features = ["experimental-wasm"] }
 tokio = { version = "1.52.3", features = ["rt-multi-thread", "sync", "time"] }
+twitch-irc = { version = "6.0.0", features = ["tokio-rustls", "transport-tcp", "transport-tcp-rustls-native-roots"], default-features = false }

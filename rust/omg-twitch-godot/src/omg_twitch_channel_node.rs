@@ -5,6 +5,7 @@ use godot::classes::INode;
 use tokio::runtime::Runtime;
 use std::time::Duration;
 
+use crate::twitch_irc::TwitchIrc;
 
 #[derive(Debug)]
 enum Event {
@@ -19,6 +20,7 @@ pub struct OmgTwitchChannelNode {
     runtime: Runtime,
     event_rx: tokio::sync::mpsc::Receiver< Event >,
     event_tx: tokio::sync::mpsc::Sender< Event >,
+    //twitch_irc: TwitchIrc,
 }
 
 
@@ -29,12 +31,14 @@ impl INode for OmgTwitchChannelNode {
         godot_print!("Hello, world!"); // Prints to the Godot console
         
         let runtime = Runtime::new().expect("Failed to create runtime");
-        let (event_tx, mut event_rx) = tokio::sync::mpsc::channel( 100 );
+        let (event_tx, event_rx) = tokio::sync::mpsc::channel( 100 );
+        // let twitch_irc = TwitchIrc::new();
         Self {
             base,
             runtime,
             event_rx,
             event_tx,
+            // twitch_irc,
         }
     }
 
@@ -58,6 +62,11 @@ impl INode for OmgTwitchChannelNode {
             // godot_print!("Late ready"); // Prints to the Godot console
         });
 
+        self.runtime.spawn(async move {
+            let mut twitch_irc = TwitchIrc::new();
+            twitch_irc.join_channel("anti666");
+            twitch_irc.run().await;
+        });
     }
 
 }
