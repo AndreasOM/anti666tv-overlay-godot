@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://nhm4is6lrgt3"]
+
+[ext_resource type="Script" uid="uid://cvjxwl02sjtab" path="res://overlay_elements/twitch_chat/twitch_message_element.gd" id="1_aejen"]
+
+[node name="TwitchMessageElement" type="MarginContainer" unique_id=1413912719]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aejen")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=911664347]
+unique_name_in_owner = true
+layout_mode = 2

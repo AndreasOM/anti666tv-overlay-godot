@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8cmtwoa0jr10" path="res://overlay_elements/twitch_chat/twitch_chat_overlay_element.gd" id="1_s4no0"]
 [ext_resource type="FontFile" uid="uid://dke4iscrnvat6" path="res://assets/fonts/FiraCode-Medium.ttf" id="2_3beb1"]
+[ext_resource type="PackedScene" uid="uid://nhm4is6lrgt3" path="res://overlay_elements/twitch_chat/twitch_message_element.tscn" id="3_jxu74"]
 
 [node name="TwitchChatOverlayElement" type="MarginContainer" unique_id=1965444440]
 anchors_preset = 15
@@ -32,5 +33,8 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_3beb1")
 theme_override_font_sizes/font_size = 64
 text = "Twitch Chat"
+
+[node name="TwitchMessageElement" parent="ScrollContainer/VBoxContainer" unique_id=1413912719 instance=ExtResource("3_jxu74")]
+layout_mode = 2
 
 [connection signal="message_received" from="OmgTwitchChannelNode" to="." method="_on_omg_twitch_channel_node_message_received"]
