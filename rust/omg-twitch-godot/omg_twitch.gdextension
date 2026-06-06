@@ -11,5 +11,6 @@ reloadable = true
 ;macos.debug =            "./bin/debug/libomg_twitch_godot.dylib"
 ;macos.release =          "./bin/debug/libomg_twitch_godot.dylib"
 
+linux.debug.arm32 =      "./bin/linux/armv7/debug/libomg_twitch_godot.so"
 macos.debug.arm64 =      "./bin/macos/aarch64/debug/libomg_twitch_godot.dylib"
 ; macos.release.arm64 =    "./bin/macos/aarch64/release/libomg_twitch_godot.dylib"
