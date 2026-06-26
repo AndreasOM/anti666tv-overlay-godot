@@ -9,7 +9,8 @@ extends MarginContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	self.set_text("Test [emote id=emotesv2_9b59df7cc5f94af6b46953e6da05d18c]")
+#	self.set_text("Test [emote id=emotesv2_9b59df7cc5f94af6b46953e6da05d18c]")
+	self.set_text("Test [emote id=emotesv2_9b59df7cc5f94af6b46953e6da05d18c] [emote id=emotesv2_40ea2dc0375d4443827a9c8c794d2e41]")
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,61 +50,36 @@ func set_text( text: String ) -> void:
 				)
 				eids.push_back( eid )
 		print( chunk )
-	
-#	var m = Mode.TEXT
-#	var emote_len = 0
-#	for i in range(0, text.length()):
-#	#for c in text:
-#		var c = text[ i ]
-#		match m:
-#			Mode.TEXT:
-#				if c == "[":
-#					m = Mode.EMOTE
-#					emote_len = 1
-#					for j in range( i+1, text.length()):
-#						var cj = text[ j ]
-#						if cj == "]":
-#							emote_len = j - i
-#							var img = Texture2D.new()
-#							img = load("res://icon.svg")
-#							self.rich_text_label.add_image(
-#								img,
-#								28, 28,
-#								Color.WHITE, #Color.DEEP_PINK
-##								Rect2(),
-#								"FUU",
-#							)
-#					continue
-#				self.rich_text_label.add_text( c )
-#			Mode.EMOTE:
-#				emote_len -= 1
-#				if emote_len <= 0:
-#					m = Mode.TEXT
-##				pass
-#		print(c)
-#	self.rich_text_label.text = text
 
+	
 
 	# :TODO: for eid in eids:
-	var http_request = HTTPRequest.new()
-	add_child(http_request)
-	http_request.request_completed.connect(self._http_request_completed)
-#	var error = http_request.request("https://placehold.co/28.png")
-	var error = http_request.request("https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_9b59df7cc5f94af6b46953e6da05d18c/default/light/4.0")
+
+	for eid in eids:
+	#var eid = "emotesv2_9b59df7cc5f94af6b46953e6da05d18c"
+		var emote_request = EmoteRequest.new()
+		emote_request.url = "https://static-cdn.jtvnw.net/emoticons/v2/%s/default/light/4.0" % [ eid ]
+		emote_request.eid = eid
+		emote_request.succeeded.connect( _emote_request_succeeded )
+		
+		self.add_child( emote_request )
+		emote_request.fetch()
+
+func _emote_request_succeeded( image, eid ) -> void:
+	var texture = ImageTexture.create_from_image(image)
+
+	# Display the image in a TextureRect node.
+	var texture_rect = TextureRect.new()
+#	add_child(texture_rect)
+	texture_rect.texture = texture
+
+	self.rich_text_label.update_image(
+		eid,
+		1, #ImageUpdateMask.UPDATE_TEXTURE,
+		texture, #img,
+	)
+	pass
 	
-	if error != OK:
-		push_error("An error occurred in the HTTP request.")
-
-
-
-#	var img = load("res://assets/bugs/anti666tv-round-150.png")
-#	self.rich_text_label.update_image(
-#		"FUU",
-#		1, #ImageUpdateMask.UPDATE_TEXTURE,
-#		img,
-#	)
-#	pass
-
 func _http_request_completed(result, response_code, headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		push_error("Image couldn't be downloaded. Try a different image.")
