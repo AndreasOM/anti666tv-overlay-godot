@@ -7,11 +7,7 @@ use std::time::Duration;
 
 use crate::twitch_irc::TwitchIrc;
 
-#[derive(Debug)]
-enum Event {
-    Debug{ msg: String },
-    Noop,
-}
+use crate::event::Event;
 
 #[derive(GodotClass)]
 #[class(base=Node)]
@@ -62,8 +58,10 @@ impl INode for OmgTwitchChannelNode {
             // godot_print!("Late ready"); // Prints to the Godot console
         });
 
+        let event_tx = self.event_tx.clone();
+
         self.runtime.spawn(async move {
-            let mut twitch_irc = TwitchIrc::new();
+            let mut twitch_irc = TwitchIrc::new( event_tx );
             twitch_irc.join_channel("anti666");
             twitch_irc.run().await;
         });
@@ -81,7 +79,17 @@ impl OmgTwitchChannelNode {
         loop {
             match self.event_rx.try_recv() {
                 Ok( e ) => {
-                    godot_print!("{:?}", e );
+                    match e {
+                        Event::Debug{ msg } => {
+                            godot_print!("{:?}", msg );
+                        },
+                        Event::Message( msg ) => {
+                            self.signals().message_received().emit( msg.text );
+                        }
+                        uh => {
+                            godot_print_rich!("[color=orange] Unhandled Event: {uh:?}");
+                        }
+                    }
                 }
                 _ => break,
             }

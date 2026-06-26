@@ -22,3 +22,5 @@ mod omg_twitch_channel_node;
 pub use omg_twitch_channel_node::OmgTwitchChannelNode;
 
 mod twitch_irc;
+mod event;
+mod message;

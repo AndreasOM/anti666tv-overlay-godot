@@ -23,9 +23,24 @@ func _on_omg_twitch_channel_node_message_received(msg: String) -> void:
 	self.add_message(msg)
 
 func add_message(msg: String) -> void:
+	if msg == "!clear":
+		self.clear_messages()
+		return
+
 	var l = Label.new()
 	l.add_theme_font_size_override("font_size", 32)
 	l.text = ">> %s" % [ msg ]
 	
 	self.v_box_container.add_child( l )
 	pass
+
+func clear_messages() -> void:
+	if self.v_box_container == null:
+		return
+	for c in self.v_box_container.get_children():
+		var l = c as Label;
+		if l == null:
+			continue
+		l.queue_free()
+		self.v_box_container.remove_child( l )
+		
