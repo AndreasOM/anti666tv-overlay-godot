@@ -6,6 +6,8 @@ extends OverlayElement
 
 var _pending_messages: Array[ String ] = []
 
+const TWITCH_MESSAGE_ELEMENT = preload("uid://nhm4is6lrgt3")
+
 func _ready() -> void:
 	while !self._pending_messages.is_empty():
 		var msg = self._pending_messages.pop_front()
@@ -27,12 +29,15 @@ func add_message(msg: String) -> void:
 		self.clear_messages()
 		return
 
-	var l = Label.new()
-	l.add_theme_font_size_override("font_size", 32)
-	l.text = ">> %s" % [ msg ]
+	var l = TWITCH_MESSAGE_ELEMENT.instantiate()
+	# var l = TwitchMessageElement.new()
+	# l.add_theme_font_size_override("font_size", 32)
+	# l.text = ">> %s" % [ msg ]
+	# l.set_text( msg )
+	l.text = msg
 	
 	self.v_box_container.add_child( l )
-	pass
+
 
 func clear_messages() -> void:
 	if self.v_box_container == null:

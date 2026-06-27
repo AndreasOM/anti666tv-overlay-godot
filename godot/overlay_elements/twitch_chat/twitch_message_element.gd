@@ -7,11 +7,14 @@ extends MarginContainer
 
 @export var text = "" : set = set_text
 
+var _text: String = ""
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 #	self.set_text("Test [emote id=emotesv2_9b59df7cc5f94af6b46953e6da05d18c]")
-	self.set_text("Test [emote id=emotesv2_9b59df7cc5f94af6b46953e6da05d18c] [emote id=emotesv2_40ea2dc0375d4443827a9c8c794d2e41]")
-	pass # Replace with function body.
+#	self.set_text("Test [emote id=emotesv2_9b59df7cc5f94af6b46953e6da05d18c] [emote id=emotesv2_40ea2dc0375d4443827a9c8c794d2e41]")
+	
+	self._update_text()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -27,10 +30,17 @@ enum Mode {
 	EMOTE
 }
 func set_text( text: String ) -> void:
+	self._text = text
+	self._update_text()
+	
+func _update_text() -> void:
+	if self.rich_text_label == null:
+		return
+
 	self.rich_text_label.text = ""
 
 	var eids: Array[ String ] = []
-	var chunks = EmoteParser.parse( text )
+	var chunks = EmoteParser.parse( self._text )
 	for chunk in chunks:
 		match chunk["type"]:
 			EmoteParser.TYPE_TEXT:

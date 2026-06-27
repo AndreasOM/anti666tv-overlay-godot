@@ -10,6 +10,7 @@ use tokio::sync::mpsc::UnboundedReceiver;
 use crate::event::Event;
 
 pub struct TwitchIrc {
+	#[allow(dead_code)] // :TODO:
 	join_handle: Option< JoinHandle<()> >,
 	incoming_messages: Option<UnboundedReceiver<ServerMessage>>,
 	client: TwitchIRCClient<SecureTCPTransport, StaticLoginCredentials>,
@@ -20,7 +21,7 @@ pub struct TwitchIrc {
 impl TwitchIrc {
 	pub fn new( event_tx: tokio::sync::mpsc::Sender< Event > ) -> Self {
 	    let config = ClientConfig::default();
-	    let (mut incoming_messages, client) =
+	    let (incoming_messages, client) =
 	        TwitchIRCClient::<SecureTCPTransport, StaticLoginCredentials>::new(config);
 		Self {
 			join_handle: None,
@@ -44,10 +45,25 @@ impl TwitchIrc {
 	            println!("Received message: {:?}", message);
 	            match message {
 	            	ServerMessage::Privmsg( pm ) => {
+	            		let mut text = pm.message_text.clone();
+
+	            		for emote in pm.emotes.into_iter().rev() {
+		            		let eid = &emote.id;
+	            			println!("Emote: {emote:?}");
+
+	            			let (head, end) = text.split_at( emote.char_range.end );
+	            			let (start, middle) = head.split_at( emote.char_range.start );
+
+	            			println!("start: {start:?} middle: {middle:?} end: {end:?}");
+
+	            			// text = format!( "{start} ->{middle}<- {end}" );
+	            			text = format!( "{start}[emote id={eid}]{end}" );
+	            		}
+
 			            let msg = Message{
 			            	// text: format!( "Received message: {:?}", message ),
 			            	// text: format!( "Received message: {}", pm.message_text ),
-			            	text: pm.message_text,
+			            	text: text,
 			            };
 
 			            let _ = self.event_tx.send(
@@ -55,7 +71,7 @@ impl TwitchIrc {
 			            ).await;
 
 	            	},
-	            	uh => {
+	            	_uh => {
 	            		// :TODO:
 	            	}
 	            }
